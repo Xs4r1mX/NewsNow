@@ -8,4 +8,6 @@
     <string name="entertainment">ENTERTAINMENT</string>
     <string name="science">SCIENCE</string>
     <string name="technology">TECHNOLOGY</string>
+    <string name="todo">TODO</string>
+    <string name="todoxs">TODO</string>
 </resources>

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="12dp"
     android:elevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="4dp" >
+        android:orientation="horizontal"
+        style="@style/CardBack"
+        android:padding="4dp">
 
         <ImageView
+            android:id="@+id/article_image_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/article_image_view"
-            />
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,32 +28,28 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/article_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:maxLines="3"
-                tools:text="this is the title"
                 android:layout_marginBottom="8dp"
-                android:id="@+id/article_title"
-                />
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="this is the title" />
 
             <TextView
+                android:id="@+id/article_source"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="source"
                 android:layout_marginBottom="8dp"
-                android:id="@+id/article_source"
-                />
+                android:textSize="12sp"
+                tools:text="source" />
 
 
         </LinearLayout>
 
 
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

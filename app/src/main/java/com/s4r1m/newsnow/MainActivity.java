@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     NewsRecyclerAdapter adapter;
 
     SearchView searchView;
-    Button btn1 , btn2 ,btn3 ,btn4 ,btn5 ,btn6 ,btn7;
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
 
     LinearProgressIndicator progressIndicator;
 
@@ -37,14 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.news_recycler_view);
         progressIndicator = findViewById(R.id.progress_bar);
-        searchView=findViewById(R.id.search_view);
-        btn1=findViewById(R.id.btn_1);
-        btn2=findViewById(R.id.btn_2);
-        btn3=findViewById(R.id.btn_3);
-        btn4=findViewById(R.id.btn_4);
-        btn5=findViewById(R.id.btn_5);
-        btn6=findViewById(R.id.btn_6);
-        btn7=findViewById(R.id.btn_7);
+        searchView = findViewById(R.id.search_view);
+        btn1 = findViewById(R.id.btn_1);
+        btn2 = findViewById(R.id.btn_2);
+        btn3 = findViewById(R.id.btn_3);
+        btn4 = findViewById(R.id.btn_4);
+        btn5 = findViewById(R.id.btn_5);
+        btn6 = findViewById(R.id.btn_6);
+        btn7 = findViewById(R.id.btn_7);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn7.setOnClickListener(this);
 
 
-        getNews("GENERAL",null);
+        getNews("GENERAL", null);
         setUpRecyclerView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                getNews("GENERAL",query);
+                getNews("GENERAL", query);
                 return false;
             }
 
@@ -72,31 +72,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    void setUpRecyclerView()
-    {
+    void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        if(articleList!=null)
-        {
+        if (articleList != null) {
             adapter = new NewsRecyclerAdapter(articleList);
             recyclerView.setAdapter(adapter);
         }
     }
 
-    void changeInProgress(boolean show)
-    {
-        if(show)
-        {
+    void changeInProgress(boolean show) {
+        if (show) {
             progressIndicator.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             progressIndicator.setVisibility(View.INVISIBLE);
         }
     }
 
-    void getNews(String category, String query)
-    {
+    void getNews(String category, String query) {
         changeInProgress(true);
-        NewsApiClient newsApiClient=new NewsApiClient(getString(R.string.api_key));
+        NewsApiClient newsApiClient = new NewsApiClient(getString(R.string.api_key));
         newsApiClient.getTopHeadlines(new TopHeadlinesRequest.Builder()
                         .language("en")
                         .category(category)
@@ -106,26 +100,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onSuccess(ArticleResponse response) {
-                        runOnUiThread(()->{
+                        runOnUiThread(() -> {
                             changeInProgress(false);
                             List<Article> newArt = response.getArticles();
-                            if(newArt!=null)
-                            {
-                                articleList=response.getArticles();
+                            if (newArt != null) {
+                                articleList = response.getArticles();
+                                for (Article article : articleList) {
+                                    if (article == null)
+                                        articleList.remove(null);
+                                }
                                 adapter.updateData(articleList);
                                 adapter.notifyDataSetChanged();
-                            }
-                            else {
+                            } else {
                                 Log.i("Article:", "onSuccess: Null Object");
                             }
 
                         });
-                        }
+                    }
 
 
                     @Override
                     public void onFailure(Throwable throwable) {
-                        Log.i("GOT FAILURE", "onFailure: "+throwable.getMessage());
+                        Log.i("GOT FAILURE", "onFailure: " + throwable.getMessage());
                     }
                 });
     }
@@ -134,6 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Button btn = (Button) v;
         String category = btn.getText().toString();
-        getNews(category,null);
+        getNews(category, null);
     }
 }

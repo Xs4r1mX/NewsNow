@@ -7,23 +7,21 @@
     tools:context=".NewsFullActivity">
 
     <TextView
+        android:id="@+id/app_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:gravity="center"
         android:layout_marginTop="5dp"
-        android:textSize="30sp"
         android:fontFamily="sans-serif-smallcaps"
-        android:textColor="@color/my_primary"
+        android:gravity="center"
         android:padding="4dp"
-        android:id="@+id/app_title"
-        />
+        android:text="@string/app_name"
+        android:textColor="@color/my_primary"
+        android:textSize="30sp" />
 
     <WebView
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/app_title"
-        android:id="@+id/web_view"
-        />
+        android:layout_below="@id/app_title" />
 
 </RelativeLayout>

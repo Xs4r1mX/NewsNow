@@ -13,4 +13,8 @@
 
         <item name="android:statusBarColor">@color/my_primary</item>
     </style>
+
+    <style name="Theme.NewsNow" parent="Base.Theme.NewsNow" />
+    <style name="CardBack"><item name="android:background">#131313</item> </style>
+
 </resources>
